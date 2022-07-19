@@ -25,19 +25,19 @@ export default new Router({
       component: () => import("./components/Index.vue")
     },
     {
-      path: "/telefonos",
-      name: "telefonos",
-      component: () => import("./components/TelefonosList.vue")
+      path: "/departamentos",
+      name: "departamentos",
+      component: () => import("./components/DepartamentosList.vue")
     },
     {
-      path: "/create_telefono",
-      name: "create_telefono",
-      component: () => import("./components/CreateTelefono.vue")
+      path: "/create_departamento",
+      name: "create_departamento",
+      component: () => import("./components/CreateDepartamento.vue")
     },
     {
-       path: "/edit_telefono/:id",
-       name: "edit_telefono",
-       component: () => import("./components/EditTelefono.vue")
+       path: "/edit_departamento/:id",
+       name: "edit_departamento",
+       component: () => import("./components/EditDepartamento.vue")
      },
   ]
 });

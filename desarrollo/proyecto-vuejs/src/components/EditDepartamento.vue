@@ -2,16 +2,16 @@
     <div class="pt-5">
         <form @submit.prevent="create" method="post">
             <div class="form-group">
-                <label for="telefono">Numero</label>
+                <label for="departamento">Departamento</label>
                 <input
                     type="text"
                     class="form-control"
-                    id="telefono"
-                    v-model="telefono.telefono"
+                    id="departamento"
+                    v-model="departamento.departamento"
                     v-validate="'required'"
-                    name="telefono"
-                    placeholder="Ingres telefono"
-                    :class="{'is-invalid': errors.has('telefono.telefono') && submitted}">
+                    name="departamento"
+                    placeholder="Ingrese departamento"
+                    :class="{'is-invalid': errors.has('departamento.departamento') && submitted}">
                 <div class="invalid-feedback">
                     Please provide a valid name.
                 </div>
@@ -23,24 +23,23 @@
                     type="text"
                     class="form-control"
                     id="Tipo"
-                    v-model="telefono.tipo"
+                    v-model="departamento.tipo"
                     v-validate="'required'"
                     name="tipo"
                     placeholder="Ingrese Tipo"
-                    :class="{'is-invalid': errors.has('telefono.tipo') && submitted}">
+                    :class="{'is-invalid': errors.has('departamento.tipo') && submitted}">
                 <div class="invalid-feedback">
                     Please provide a valid apellido.
                 </div>
             </div>
 
             <div class="form-group">
-              <br>
-                <label for="estudiante">Estudiante</label>
-                <select v-model="telefono.estudiante">
-                            <option v-for="e in estudiantesList" :key="e.url" :value="e.url">{{ e.nombre }} {{ e.apellido }}</option>
+                <label for="propietario">Propietario</label>
+                <select v-model="departamento.propietario">
+                            <option v-for="e in propietariosList" :key="e.url" :value="e.url">{{ e.nombre }} {{ e.apellido }}</option>
                         </select>
             </div>
-            <br>
+
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
     </div>
@@ -53,24 +52,29 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            telefono: {
-                telefono: '',
+            departamento: {
+                departamento: '',
                 tipo: '',
-                estudiante: '',
+                propietario: '',
             },
-            estudiantesList: [],
+            propietariosList: [],
             submitted: false
         }
     },
     mounted() {
-        this.getEstudiantesList()
+        this.getPropietariosList(),
+        axios.get('http://127.0.0.1:8000/api/departamentos/' + this.$route.params.id + '/')
+            .then( response => {
+                console.log(response.data)
+                this.departamento = response.data
+        });
     },
     methods: {
-      getEstudiantesList() {
+      getPropietariosList() {
             axios
-            .get('http://127.0.0.1:8000/api/estudiantes/')
+            .get('http://127.0.0.1:8000/api/propietarios/')
             .then(response => {
-                this.estudiantesList = response.data
+                this.propietariosList = response.data
             })
             .catch(error => {
                 console.log(error)
@@ -83,11 +87,11 @@ export default {
                 if (!result) {
                     return;
                 }
-                axios.post('http://127.0.0.1:8000/api/numerost/',
-                        this.telefono
+                axios.put(`http://127.0.0.1:8000/api/departamentos/${this.departamento.id}/`,
+                        this.departamento
                     )
                     .then(response => {
-                        this.$router.push('/telefonos');
+                        this.$router.push('/departamentos');
                     })
             });
         }

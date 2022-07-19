@@ -10,7 +10,7 @@
                     v-model="propietario.nombre"
                     v-validate="'required'"
                     name="nombre"
-                    placeholder="Ingres su nombre"
+                    placeholder="Ingrese su nombre"
                     :class="{'is-invalid': errors.has('propietario.nombre') && submitted}">
                 <div class="invalid-feedback">
                     Please provide a valid name.
@@ -26,7 +26,7 @@
                     v-model="propietario.apellido"
                     v-validate="'required'"
                     name="apellido"
-                    placeholder="Ingres su apellido"
+                    placeholder="Ingrese su apellido"
                     :class="{'is-invalid': errors.has('propietario.apellido') && submitted}">
                 <div class="invalid-feedback">
                     Please provide a valid apellido.
@@ -34,34 +34,34 @@
             </div>
 
             <div class="form-group">
-                <label for="cedula">Cédula</label>
+                <label for="edad">Edad</label>
                 <input
                     type="text"
                     class="form-control"
-                    id="cedula"
-                    v-model="propietario.cedula"
+                    id="edad"
+                    v-model="propietario.edad"
                     v-validate="'required'"
                     name="apellido"
-                    placeholder="Ingres su cédula"
-                    :class="{'is-invalid': errors.has('propietario.cedula') && submitted}">
+                    placeholder="Ingrese su edad"
+                    :class="{'is-invalid': errors.has('propietario.edad') && submitted}">
                 <div class="invalid-feedback">
-                    Please provide a valid cedula.
+                    Please provide a valid edad.
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="correo">Correo</label>
+                <label for="nacionalidad">Nacionalidad</label>
                 <input
                     type="text"
                     class="form-control"
-                    id="correo"
-                    v-model="propietario.correo"
+                    id="nacionalidad"
+                    v-model="propietario.nacionalidad"
                     v-validate="'required'"
                     name="apellido"
-                    placeholder="Ingres su correo"
-                    :class="{'is-invalid': errors.has('propietario.correo') && submitted}">
+                    placeholder="Ingrese su nacionalidad"
+                    :class="{'is-invalid': errors.has('propietario.nacionalidad') && submitted}">
                 <div class="invalid-feedback">
-                    Please provide a valid correo.
+                    Please provide a valid nacionalidad.
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Crear</button>
@@ -79,8 +79,8 @@ export default {
             propietario: {
                 nombre: '',
                 apellido: '',
-                correo: '',
-                cedula: '',
+                edad: '',
+                nacionalidad: '',
             },
             submitted: false
         }
@@ -92,7 +92,7 @@ export default {
                 if (!result) {
                     return;
                 }
-                console.log(this.correo)
+                console.log(this.nombre)
                 axios.post('http://127.0.0.1:8000/api/propietarios/',
                         this.propietario
                     )
